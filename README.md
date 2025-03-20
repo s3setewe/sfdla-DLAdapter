@@ -1,7 +1,7 @@
 # SFDLA DLAdapter
 
 
-![SFDLA DLAdapter](DLAdapter.svg)
+![SFDLA DLAdapter](sfdla_overview.svg)
 
 
 Code and Models will be added soon!
