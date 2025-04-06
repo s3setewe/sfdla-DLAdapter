@@ -1,0 +1,34 @@
+# File: dla-sfda/configs/publaynet4_sourcemodel.yaml
+# Description: Detectron2 Config for PubLayNet Source Model with 4 Classes
+MODEL:
+  META_ARCHITECTURE: GeneralizedRCNN
+  WEIGHT: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  MASK_ON: False
+  RPN:
+    PRE_NMS_TOPK_TEST: 6000
+    POST_NMS_TOPK_TEST: 300
+    ANCHOR_SIZES: (128, 256, 512)
+  ROI_HEADS:
+    NUM_CLASSES: 4
+  RESNETS:
+    NORM: "FrozenBN"
+    OUT_FEATURES: ["res4"]
+INPUT: # (Resizing)
+  RANDOM_FLIP: "none"
+  MIN_SIZE_TRAIN: (600,)
+  MIN_SIZE_TEST: 600
+TEST:
+  EVAL_PERIOD: 2000
+DATASETS:
+  TRAIN: ("publaynet4_train",)
+  TEST: ("publaynet4_test",)
+SOLVER:
+  BASE_LR: 0.001
+  WEIGHT_DECAY: 0.0001
+  STEPS: (10000, 20000, 40000)
+  MAX_ITER: 150000
+  IMS_PER_BATCH: 8
+  CHECKPOINT_PERIOD: 5000
+  WARMUP_ITERS: 1000
+  WARMUP_METHOD: "linear"
+OUTPUT_DIR: "/workspace"

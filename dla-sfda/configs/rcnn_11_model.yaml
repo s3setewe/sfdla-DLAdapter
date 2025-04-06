@@ -1,0 +1,19 @@
+# File: dla-sfda/configs/rcnn_11_model.yaml
+# Description: Detectron2 Config for GeneralizedRCNN with 11 Classes and fix 1025 Input Size
+MODEL:
+  META_ARCHITECTURE: GeneralizedRCNN
+  WEIGHT: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  MASK_ON: False
+  RPN:
+    PRE_NMS_TOPK_TEST: 6000
+    POST_NMS_TOPK_TEST: 300
+    ANCHOR_SIZES: (128, 256, 512)
+  ROI_HEADS:
+    NUM_CLASSES: 11
+  RESNETS:
+    NORM: "FrozenBN"
+    OUT_FEATURES: ["res4"]
+INPUT:
+  RANDOM_FLIP: "none"
+  MIN_SIZE_TRAIN: (1025,)
+  MIN_SIZE_TEST: 1025

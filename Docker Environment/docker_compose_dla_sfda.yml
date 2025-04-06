@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  dla_sfda_service:
+    image: dla_sfda_basic
+    container_name: dla_sfda_basic_container
+    runtime: nvidia
+    volumes:
+      - /:/extern_home
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+        limits:
+          memory: "48g"
+          cpus: "4"
+    command: /bin/bash
+    shm_size: '8g'

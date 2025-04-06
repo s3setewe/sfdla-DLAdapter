@@ -1,0 +1,33 @@
+# File: dla-sfda/configs/sfda_pln4dln4.yaml
+# Description: detectron2 Config for SFDA with 11 Classes and fix 1025 Input Size
+MODEL:
+  META_ARCHITECTURE: "student_model_dla_sfda"
+  WEIGHT: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  MASK_ON: False
+  RPN:
+    PRE_NMS_TOPK_TEST: 6000
+    POST_NMS_TOPK_TEST: 300
+    ANCHOR_SIZES: (128, 256, 512)
+  ROI_HEADS:
+    NUM_CLASSES: 4
+  RESNETS:
+    NORM: "FrozenBN"
+    OUT_FEATURES: ["res4"]
+INPUT:
+  RANDOM_FLIP: "none"
+  MIN_SIZE_TRAIN: (600,)
+  MIN_SIZE_TEST: 600
+DATASETS:
+  TRAIN: ("doclaynet4_train",)
+  TEST: ("doclaynet4_val",)
+SOLVER:
+  BASE_LR: 0.001 # Standard-LR
+  BACKBONE_LR: 0.001  # Backbone-LR
+  ROI_HEAD_LR: 0.001   # ROI-Head-LR
+  WEIGHT_DECAY: 0.00001
+  STEPS: ()
+  MAX_ITER: 70000
+  IMS_PER_BATCH: 1
+  WARMUP_ITERS: 0
+  CHECKPOINT_PERIOD: 5000
+OUTPUT_DIR: "/workspace"
